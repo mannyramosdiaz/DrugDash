@@ -1,6 +1,6 @@
 # DrugDash
 
-An interactive Dashboard that explores US States for the following data: Drug Overdose Deaths, % to total Deaths and Drug type over a 12-month period over the years 2015 to 2018. In addition to exploring drug overdose by state the interactive dashboard will also compare state unemployment rates over the same time period as well as a mental health survey by state that ask survey participants the following questions. What Stresses you out, What are you most likely to do when you are stressed, What resources do you use when you are stressed and What stresses you out the most. The purpose of this dashboard to be able to select a State then understand the stress factors, unemployment rates and drug use habits of the state resident. 
+An interactive Dashboard that explores US States for the following data: Drug Overdose Deaths, % to total Deaths and Drug type over a 12-month period over the years 2015 to 2018. In addition to exploring drug overdose by state the interactive dashboard will also compare state unemployment rates over the same time period as well as a mental health survey by state that ask survey participants the following questions. What Stresses you out, What are you most likely to do when you are stressed, What resources do you use when you are stressed and What stresses you out the most. The purpose of this dashboard to be able to select a State then understand the stress factors, unemployment rates and drug use habits of the state residents. 
 
 Functional proposal:
 
