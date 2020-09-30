@@ -10,3 +10,5 @@ Use the Database to create a flask app in Json format and deploy Flask app as fu
 
 Create HTML & JavaScript based interactive dashboard that will allow users to interface by selecting a state to change visualization and details.
 
+link to covid dashboard to model after 
+https://experience.arcgis.com/experience/96dd742462124fa0b38ddedb9b25e429
