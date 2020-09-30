@@ -1,2 +1,2 @@
-# drugDash
+# DrugDash
 Project 2
