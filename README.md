@@ -4,7 +4,7 @@ An interactive Dashboard that explores US States for the following data: Drug Ov
 
 Functional proposal:
 
-ETL process through Pandas and SQLAlchemy to create a combined functional database. 
+ETL process through Pandas and SQLAlchemy to create a combined single database. 
 
 Use the Database to create a flask app in Json format and deploy Flask app as functioning API.
 
