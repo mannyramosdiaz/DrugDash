@@ -4,7 +4,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func, inspect
 import json
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 
 
 #pull from databases
@@ -21,8 +21,13 @@ unemployment_json = json.dumps(unemployment_dict, indent = 2)
 
 
 ##Flask App
-app = Flask(__name__)
+app = Flask(__name__) # template_folder="templates")
 
+@app.route("/")
+#@app.route("/home")
+def home():
+    """home page"""
+    return render_template("index.html")
 
 @app.route("/api/v1.0/drugdata")
 def drug_data():
