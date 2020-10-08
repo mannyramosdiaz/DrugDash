@@ -11,12 +11,12 @@ function bubbleCharts() {
         var years = response.year;
 
         let bubble = {
-            x: states,
-            y: years,
+            x: ["Alabama", "California", "Arizona", "Virginia"],
+            y: ["2015", "2016", "2017", "2018"],
             mode: "markers",
             marker: {
-                size: totod,
-                sizeref: 8,
+                size: [5,6,7,8,9],
+                sizeref: 0.25,
                 colorscale: "Jet"
             }
         };
@@ -68,7 +68,7 @@ function pieCharts() {
 
 
 pieCharts2();
-function pieCharts2() {
+function pieCharts2(state) {
     let pieLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugdata"
     //let bubbleLoc = "/api/v1.0/drugdata"
 
@@ -76,7 +76,7 @@ function pieCharts2() {
         console.log(response);
         var states = response.state;
 
-        var resultsArray = states.filter(stateobj => stateobj.state == "Alaska");
+        var resultsArray = states.filter(stateobj => stateobj.state == state);
         var results =resultsArray[0];
         var values = [results.coke_od, results.her_od, results.opi_od];
         
@@ -129,16 +129,16 @@ function lineCharts() {
 
 lineCharts2();
 
-function lineCharts2() {
+function lineCharts2(state) {
     let lineLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugvunemployment"
     //let bubbleLoc = "/api/v1.0/drugdata"
 
-    d3.json(lineLoc).then(function(response){
+    d3.json(lineLoc).then((response) => {
         console.log(response);
 
         var states = response.state;
 
-        var resultsArray = states.filter(stateobj => stateobj.state == "Alaska");
+        var resultsArray = states.filter(stateobj => stateobj.state == state);
         var results =resultsArray[0];
         var years = results.year;
         var unemp = results.unemployment_rate;
@@ -167,19 +167,24 @@ function Info() {
     //select drop down information
     var selector = d3.select("#selDataset");
     // pull sample numbers from json
-    d3.json("samples.json").then((data) => {
-        var sampleNames = data.names;
+        var stateNames = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columnbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachuset", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" ];
+        console.log(stateNames);
         //populate drop down items
-        sampleNames.forEach((sample) => {
+        stateNames.forEach((state) => {
             selector
                 .append("option")
-                .text(sample)
-                .property("value", sample);
-        });
+                .text(state)
+                .property("value", state);
+        })
         // set first number in sample as starter
-        var fvalue = sampleNames[0];
-        Charts(fvalue);
-        Data(fvalue);
+        var fvalue = stateNames[0];
+        lineCharts2(fvalue);
+        pieCharts2(fvalue);
+};
 
-    });
-}
+function optionChanged(newstate) {
+    lineCharts2(newstate);
+    pieCharts2(newstate);
+};
+
+Info();
