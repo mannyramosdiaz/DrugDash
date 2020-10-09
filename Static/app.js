@@ -21,7 +21,7 @@ function Info() {
         pieCharts2(fvalue);
         lineCharts2(fvalue);
         bubbleCharts(fvalue);
-        donut(fvalue);
+        stacked(fvalue);
 
     });
 }
@@ -142,7 +142,7 @@ function bubbleCharts(state) {
             odherArray.push(stateobj.her_per)
             odopiArray.push(stateobj.opi_per)
             deathArray.push(stateobj.opi_od)
-            console.log(stateobj)
+            //console.log(stateobj)
         })
 
         let bubble1 = {
@@ -194,10 +194,84 @@ function bubbleCharts(state) {
     })
 };
 
-function donut(state) {
+function stacked(state) {
 
-    d3.csv("../csv Data/Stress_final.csv").then((data) => {
-        console.log(data)
+    d3.csv("../csv Data/Stress_final.csv").then((response) => {
+        //console.log(response)
+
+        var states = response;
+        //console.log(states)
+        var resultsArray = states.filter(stateobj => stateobj.Region == state);
+
+
+        var regionvalue = [];
+        var drugvalue = [];
+        var eatvalue = [];
+        var nothingvalue = [];
+        var othervalue = [];
+        var friendsvalue = [];
+        var workoutvalue = [];
+
+        resultsArray.forEach(stateobj => {
+            drugvalue.push(stateobj.Drugs_Drinking)
+            eatvalue.push(stateobj.Eat)
+            nothingvalue.push(stateobj.Nothing)
+            othervalue.push(stateobj.Other)
+            friendsvalue.push(stateobj.Talk_to_Friends)
+            workoutvalue.push(stateobj.Work_out)
+            regionvalue.push(stateobj.Region)
+            //console.log(stateobj)
+        })
+
+        var trace1 = {
+            x: regionvalue,
+            y: drugvalue,
+            name: 'Drugs & Drinking',
+            type: 'bar'
+          };
+          
+          var trace2 = {
+            x: regionvalue,
+            y: eatvalue,
+            name: 'Eat',
+            type: 'bar'
+          };
+
+          var trace3 = {
+            x: regionvalue,
+            y: nothingvalue,
+            name: 'Do Nothing',
+            type: 'bar'
+          };
+
+          var trace4 = {
+            x: regionvalue,
+            y: othervalue,
+            name: 'Other',
+            type: 'bar'
+          };
+
+          var trace5 = {
+            x: regionvalue,
+            y: friendsvalue,
+            name: 'Friends',
+            type: 'bar'
+          };
+
+          var trace6 = {
+            x: regionvalue,
+            y: workoutvalue,
+            name: 'Work Out',
+            type: 'bar'
+          };
+
+
+          
+          var data = [trace1, trace2, trace3, trace4, trace5, trace6];
+          
+          var layout = {barmode: 'stack'};
+          
+          Plotly.newPlot('stacked', data, layout);
 
 
 
@@ -211,5 +285,5 @@ function optionChanged(newstate) {
     pieCharts2(newstate);
     lineCharts2(newstate);
     bubbleCharts(newstate);
-    donut(newstate);
+    stacked(newstate);
 }
