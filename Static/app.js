@@ -274,8 +274,6 @@ function stacked(state) {
           Plotly.newPlot('stacked', data, layout);
 
 
-
-
     })
 };
 
