@@ -11,7 +11,7 @@ function Info() {
         var stateNames = data;
 
         stateNames.forEach((state) => {
-            console.log(state.state)
+            //console.log(state.state)
             selector
             .append("option")
             .text(state.state)
@@ -22,6 +22,7 @@ function Info() {
 
         pieCharts2(fvalue);
         lineCharts2(fvalue);
+        bubbleCharts(fvalue);
 
     });
 }
@@ -33,14 +34,14 @@ function pieCharts2(state) {
     //let bubbleLoc = "/api/v1.0/drugdata"
 
     d3.json(pieLoc).then((response) => {
-        console.log(JSON.stringify(response));
+        //console.log(JSON.stringify(response));
         var states = response;
 
         var resultsArray = states.filter(stateobj => stateobj.state == state && stateobj.year == 2018);
         if (resultsArray.length > 0) {
             var result =resultsArray[0];
-            console.log(result)
-            console.log(JSON.stringify(result));
+            //console.log(result)
+            //console.log(JSON.stringify(result));
             var values = [result.coke_od, result.her_od, result.opi_od];
             
             
@@ -71,7 +72,7 @@ function lineCharts2(state) {
     //let bubbleLoc = "/api/v1.0/drugdata"
 
     d3.json(lineLoc).then((response) => {
-        console.log(response);
+        //console.log(response);
 
         var states = response;
 
@@ -110,13 +111,13 @@ function lineCharts2(state) {
         }
 
         var data = [Unemployeement, ODRate];
-        console.log(JSON.stringify(data,null,2))
+        //console.log(JSON.stringify(data,null,2))
         Plotly.newPlot("linePlot", data, layout)
         
     })
 }
 
-function bubbleCharts() {
+function bubbleCharts(state) {
     let bubbleLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugdata"
     //let bubbleLoc = "/api/v1.0/drugdata"
 
@@ -124,36 +125,44 @@ function bubbleCharts() {
         //console.log(response);
 
         var states = response;
-
+        console.log(states)
         var resultsArray = states.filter(stateobj => stateobj.state == state);
         resultsArray.sort((state1, state2) => state1.year - state2.year)
 
         
         var yearArray = [];
-        var unempArray = [];
-        var odrateArray = [];
+        var drugArray = ['Cocain', 'Heroin', 'Non-Heroin Opioid'];
+        var odcokeArray = [];
+        var odherArray = [];
+        var odopiArray = [];
+        var deathArray = [];
 
         resultsArray.forEach(stateobj => {
             yearArray.push(stateobj.year)
-            unempArray.push(stateobj.unemployment_rate)
-            odrateArray.push(stateobj.OD_perctage)
+            odcokeArray.push(stateobj.coke_per)
+            odherArray.push(stateobj.her_per)
+            odopiArray.push(stateobj.opi_per)
+            deathArray.push(stateobj.opi_od)
+            console.log(stateobj)
         })
 
-        let bubble = {
-            x: ["Alabama", "California", "Arizona", "Virginia"],
-            y: yearArray,
+        let bubble1 = {
+            x: yearArray,
+            y: deathArray,
             mode: "markers",
             marker: {
-                size: [5,6,7,8,9],
-                sizeref: 0.25,
+                size: odopiArray,
+                sizeref: .5,
                 colorscale: "Jet"
             }
         };
 
-        let bubbleChart = [bubble];
+
+
+        let bubbleChart = [bubble1];
         var layoutBubble = {
             height: 600,
-            width: 1000,
+            width: 1000
         };
 
         Plotly.newPlot("bubblePlot",bubbleChart, layoutBubble)
@@ -161,8 +170,9 @@ function bubbleCharts() {
     })
 };
 
-
+//chart
 function optionChanged(newstate) {
     pieCharts2(newstate);
     lineCharts2(newstate);
+    bubbleCharts(newstate);
 }
