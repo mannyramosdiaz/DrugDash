@@ -21,6 +21,7 @@ function Info() {
         pieCharts2(fvalue);
         lineCharts2(fvalue);
         bubbleCharts(fvalue);
+        donut(fvalue);
 
     });
 }
@@ -123,7 +124,7 @@ function bubbleCharts(state) {
         //console.log(response);
 
         var states = response;
-        console.log(states)
+        //console.log(states)
         var resultsArray = states.filter(stateobj => stateobj.state == state);
         resultsArray.sort((state1, state2) => state1.year - state2.year)
 
@@ -155,12 +156,37 @@ function bubbleCharts(state) {
             }
         };
 
+        let bubble2 = {
+            x: yearArray,
+            y: deathArray,
+            mode: "markers",
+            marker: {
+                size: odherArray,
+                sizeref: .5,
+                colorscale: "Jet"
+            }
+        };
 
+        let bubble3 = {
+            x: yearArray,
+            y: deathArray,
+            mode: "markers",
+            marker: {
+                size: odcokeArray,
+                sizeref: .5,
+                colorscale: "Jet"
+            }
+        };
 
-        let bubbleChart = [bubble1];
+        let bubbleChart = [bubble1, bubble2, bubble3];
         var layoutBubble = {
+            title: 'OD Deaths by Year verses % OD by Drug Type',
+            showlegend: false,
             height: 600,
-            width: 1000
+            width: 1000,
+            xaxis: {
+                dtick: 1
+            }
         };
 
         Plotly.newPlot("bubblePlot",bubbleChart, layoutBubble)
@@ -168,9 +194,22 @@ function bubbleCharts(state) {
     })
 };
 
+function donut(state) {
+
+    d3.csv("../csv Data/Stress_final.csv").then((data) => {
+        console.log(data)
+
+
+
+
+    })
+};
+
+
 //chart
 function optionChanged(newstate) {
     pieCharts2(newstate);
     lineCharts2(newstate);
     bubbleCharts(newstate);
+    donut(newstate);
 }
