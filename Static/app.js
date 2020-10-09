@@ -18,6 +18,8 @@ function Info() {
 
         var fvalue = stateNames[0];
 
+
+
         pieCharts2(fvalue);
         lineCharts2(fvalue);
         bubbleCharts(fvalue);
@@ -278,6 +280,7 @@ function stacked(state) {
 };
 
 
+
 //chart
 function optionChanged(newstate) {
     pieCharts2(newstate);
@@ -285,3 +288,4 @@ function optionChanged(newstate) {
     bubbleCharts(newstate);
     stacked(newstate);
 }
+
