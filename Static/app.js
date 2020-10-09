@@ -1,5 +1,3 @@
-
-
 function Info() {
     //select drop down information
     var selector = d3.select("#selDataset");
@@ -30,8 +28,8 @@ function Info() {
 Info();
 
 function pieCharts2(state) {
-    let pieLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugdata"
-    //let bubbleLoc = "/api/v1.0/drugdata"
+    let pieLoc = "../json/drug_data2.json"
+    //let bubbleLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugdata"
 
     d3.json(pieLoc).then((response) => {
         //console.log(JSON.stringify(response));
@@ -68,8 +66,8 @@ function pieCharts2(state) {
 }
 
 function lineCharts2(state) {
-    let lineLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugvunemployment"
-    //let bubbleLoc = "/api/v1.0/drugdata"
+    let lineLoc = "../json/drug_unemployment2.json"
+    //let bubbleLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugvunemployment"
 
     d3.json(lineLoc).then((response) => {
         //console.log(response);
@@ -118,8 +116,8 @@ function lineCharts2(state) {
 }
 
 function bubbleCharts(state) {
-    let bubbleLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugdata"
-    //let bubbleLoc = "/api/v1.0/drugdata"
+    let bubbleLoc = "../json/drug_data2.json"
+    //let bubbleLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugdata"
 
     d3.json(bubbleLoc).then((response) => {
         //console.log(response);
