@@ -40,7 +40,7 @@ bubbleCharts();
 pieCharts();
 
 function pieCharts() {
-    let bubbleLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugdata"
+    let bubbleLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp. com/api/v1.0/drugdata"
     //let bubbleLoc = "/api/v1.0/drugdata"
 
     d3.json(bubbleLoc).then(function(response){
@@ -166,20 +166,29 @@ function lineCharts2(state) {
 function Info() {
     //select drop down information
     var selector = d3.select("#selDataset");
-    // pull sample numbers from json
+    pull sample numbers from json
         var stateNames = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columnbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachuset", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" ];
         console.log(stateNames);
         //populate drop down items
+
+    // let lineLoc = "https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugdata"
+    // d3.json(lineLoc).then((stateNames)=>{
+
+        d3.json("https://cors-anywhere.herokuapp.com/https://calm-fortress-78674.herokuapp.com/api/v1.0/drugvunemployment").then((data)=>{
+        
+        stateNames = data;
+
         stateNames.forEach((state) => {
             selector
                 .append("option")
-                .text(state)
+                .text(state.state)
                 .property("value", state);
         })
         // set first number in sample as starter
         var fvalue = stateNames[0];
         lineCharts2(fvalue);
         pieCharts2(fvalue);
+ })
 };
 
 function optionChanged(newstate) {
